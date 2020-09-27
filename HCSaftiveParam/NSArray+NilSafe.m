@@ -12,7 +12,7 @@
 
 @implementation NSObject (Swizzling)
 
-+ (BOOL)gl_swizzleMethod:(SEL)origSel withMethod:(SEL)altSel {
++ (BOOL)hc_swizzleMethod:(SEL)origSel withMethod:(SEL)altSel {
     Method origMethod = class_getInstanceMethod(self, origSel);
     Method altMethod = class_getInstanceMethod(self, altSel);
     if (!origMethod || !altMethod) {
@@ -31,8 +31,8 @@
     return YES;
 }
 
-+ (BOOL)gl_swizzleClassMethod:(SEL)origSel withMethod:(SEL)altSel {
-    return [object_getClass((id)self) gl_swizzleMethod:origSel withMethod:altSel];
++ (BOOL)hc_swizzleClassMethod:(SEL)origSel withMethod:(SEL)altSel {
+    return [object_getClass((id)self) hc_swizzleMethod:origSel withMethod:altSel];
 }
 
 @end
@@ -43,15 +43,15 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [self gl_swizzleMethod:@selector(initWithObjects:count:) withMethod:@selector(gl_initWithObjects:count:)];
-        [self gl_swizzleClassMethod:@selector(arrayWithObjects:count:) withMethod:@selector(gl_arrayWithObjects:count:)];
-        [self gl_swizzleMethod:@selector(objectAtIndex:) withMethod:@selector(gl_objectAtIndex:)];
+        [self hc_swizzleMethod:@selector(initWithObjects:count:) withMethod:@selector(hc_initWithObjects:count:)];
+        [self hc_swizzleClassMethod:@selector(arrayWithObjects:count:) withMethod:@selector(hc_arrayWithObjects:count:)];
+        [self hc_swizzleMethod:@selector(objectAtIndex:) withMethod:@selector(hc_objectAtIndex:)];
     });
 }
 
-- (instancetype)gl_initWithObjects:(const id [])objects count:(NSUInteger)cnt {
+- (instancetype)hc_initWithObjects:(const id [])objects count:(NSUInteger)cnt {
     if (cnt == 0) {
-        return [self gl_initWithObjects:objects  count:cnt];
+        return [self hc_initWithObjects:objects  count:cnt];
     }
     id safeObjects[cnt];
     NSUInteger j = 0;
@@ -63,12 +63,12 @@
         safeObjects[j] = obj;
         j++;
     }
-    return [self gl_initWithObjects:safeObjects  count:j];
+    return [self hc_initWithObjects:safeObjects  count:j];
 }
 
-+ (instancetype)gl_arrayWithObjects:(const id [])objects  count:(NSUInteger)cnt {
++ (instancetype)hc_arrayWithObjects:(const id [])objects  count:(NSUInteger)cnt {
     if (cnt == 0) {
-        return [self gl_arrayWithObjects:objects  count:cnt];
+        return [self hc_arrayWithObjects:objects  count:cnt];
     }
     id safeObjects[cnt];
     NSUInteger j = 0;
@@ -80,12 +80,12 @@
         safeObjects[j] = obj;
         j++;
     }
-    return [self gl_arrayWithObjects:safeObjects  count:j];
+    return [self hc_arrayWithObjects:safeObjects  count:j];
 }
 
-- (instancetype)gl_objectAtIndex:(NSUInteger)index{
+- (instancetype)hc_objectAtIndex:(NSUInteger)index{
     if(index<[self count]){
-        return [self gl_objectAtIndex:index];
+        return [self hc_objectAtIndex:index];
     }else{
         NSLog(@"index is beyond bounds ");
     }
@@ -100,23 +100,23 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         Class class = NSClassFromString(@"__NSArrayM");
-        [class gl_swizzleMethod:@selector(addObject:) withMethod:@selector(gl_addObject:)];
-        [class gl_swizzleMethod:@selector(insertObject:atIndex:) withMethod:@selector(gl_insertObject:atIndex:)];
+        [class hc_swizzleMethod:@selector(addObject:) withMethod:@selector(hc_addObject:)];
+        [class hc_swizzleMethod:@selector(insertObject:atIndex:) withMethod:@selector(hc_insertObject:atIndex:)];
     });
 }
 
-- (void)gl_addObject:(id)anObject {
+- (void)hc_addObject:(id)anObject {
     if (!anObject) {
         return;
     }
-    [self gl_addObject:anObject];
+    [self hc_addObject:anObject];
 }
 
-- (void)gl_insertObject:(id)obj atIndex:(NSUInteger)index {
+- (void)hc_insertObject:(id)obj atIndex:(NSUInteger)index {
     if (!obj) {
         return;
     }
-    [self gl_insertObject:obj atIndex:index];
+    [self hc_insertObject:obj atIndex:index];
 }
 
 

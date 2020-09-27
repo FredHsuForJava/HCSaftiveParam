@@ -11,7 +11,7 @@
 
 @implementation NSObject (Swizzling)
 
-+ (BOOL)gl_swizzleMethod:(SEL)origSel withMethod:(SEL)altSel {
++ (BOOL)hc_swizzleMethod:(SEL)origSel withMethod:(SEL)altSel {
     Method origMethod = class_getInstanceMethod(self, origSel);
     Method altMethod = class_getInstanceMethod(self, altSel);
     if (!origMethod || !altMethod) {
@@ -30,8 +30,8 @@
     return YES;
 }
 
-+ (BOOL)gl_swizzleClassMethod:(SEL)origSel withMethod:(SEL)altSel {
-    return [object_getClass((id)self) gl_swizzleMethod:origSel withMethod:altSel];
++ (BOOL)hc_swizzleClassMethod:(SEL)origSel withMethod:(SEL)altSel {
+    return [object_getClass((id)self) hc_swizzleMethod:origSel withMethod:altSel];
 }
 
 @end
@@ -41,14 +41,14 @@
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [self gl_swizzleMethod:@selector(initWithObjects:forKeys:count:) withMethod:@selector(gl_initWithObjects:forKeys:count:)];
-        [self gl_swizzleClassMethod:@selector(dictionaryWithObjects:forKeys:count:) withMethod:@selector(gl_dictionaryWithObjects:forKeys:count:)];
+        [self hc_swizzleMethod:@selector(initWithObjects:forKeys:count:) withMethod:@selector(hc_initWithObjects:forKeys:count:)];
+        [self hc_swizzleClassMethod:@selector(dictionaryWithObjects:forKeys:count:) withMethod:@selector(hc_dictionaryWithObjects:forKeys:count:)];
     });
 }
 
-- (instancetype)gl_initWithObjects:(const id [])objects forKeys:(const id<NSCopying> [])keys count:(NSUInteger)cnt {
+- (instancetype)hc_initWithObjects:(const id [])objects forKeys:(const id<NSCopying> [])keys count:(NSUInteger)cnt {
     if (cnt == 0) {
-        return  [self gl_initWithObjects:objects forKeys:keys count:cnt];
+        return  [self hc_initWithObjects:objects forKeys:keys count:cnt];
     }
     id safeObjects[cnt];
     id safeKeys[cnt];
@@ -66,12 +66,12 @@
         safeObjects[j] = obj;
         j++;
     }
-    return [self gl_initWithObjects:safeObjects forKeys:safeKeys count:j];
+    return [self hc_initWithObjects:safeObjects forKeys:safeKeys count:j];
 }
 
-+ (instancetype)gl_dictionaryWithObjects:(const id [])objects forKeys:(const id<NSCopying> [])keys count:(NSUInteger)cnt {
++ (instancetype)hc_dictionaryWithObjects:(const id [])objects forKeys:(const id<NSCopying> [])keys count:(NSUInteger)cnt {
     if (cnt == 0) {
-        return [self gl_dictionaryWithObjects:objects forKeys:keys count:cnt];
+        return [self hc_dictionaryWithObjects:objects forKeys:keys count:cnt];
     }
     id safeObjects[cnt];
     id safeKeys[cnt];
@@ -86,7 +86,7 @@
         safeObjects[j] = obj;
         j++;
     }
-    return [self gl_dictionaryWithObjects:safeObjects forKeys:safeKeys count:j];
+    return [self hc_dictionaryWithObjects:safeObjects forKeys:safeKeys count:j];
 }
 
 
@@ -99,23 +99,23 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         Class class = NSClassFromString(@"__NSDictionaryM");
-        [class gl_swizzleMethod:@selector(setObject:forKey:) withMethod:@selector(gl_setObject:forKey:)];
-        [class gl_swizzleMethod:@selector(setObject:forKeyedSubscript:) withMethod:@selector(gl_setObject:forKeyedSubscript:)];
+        [class hc_swizzleMethod:@selector(setObject:forKey:) withMethod:@selector(hc_setObject:forKey:)];
+        [class hc_swizzleMethod:@selector(setObject:forKeyedSubscript:) withMethod:@selector(hc_setObject:forKeyedSubscript:)];
     });
 }
 
-- (void)gl_setObject:(id)anObject forKey:(id<NSCopying>)aKey {
+- (void)hc_setObject:(id)anObject forKey:(id<NSCopying>)aKey {
     if (!aKey || !anObject) {
         return;
     }
-    [self gl_setObject:anObject forKey:aKey];
+    [self hc_setObject:anObject forKey:aKey];
 }
 
-- (void)gl_setObject:(id)obj forKeyedSubscript:(id<NSCopying>)key {
+- (void)hc_setObject:(id)obj forKeyedSubscript:(id<NSCopying>)key {
     if (!key || !obj) {
         return;
     }
-    [self gl_setObject:obj forKeyedSubscript:key];
+    [self hc_setObject:obj forKeyedSubscript:key];
 }
 
 @end

@@ -1,0 +1,16 @@
+PODS:
+  - HCSaftiveParam (0.1.0)
+
+DEPENDENCIES:
+  - HCSaftiveParam (from `../`)
+
+EXTERNAL SOURCES:
+  HCSaftiveParam:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  HCSaftiveParam: 34ddb52536831a701d96a215ef27da6458313b10
+
+PODFILE CHECKSUM: ce28b16abe01f56b1bb763ae0343c020092b5c8e
+
+COCOAPODS: 1.9.3

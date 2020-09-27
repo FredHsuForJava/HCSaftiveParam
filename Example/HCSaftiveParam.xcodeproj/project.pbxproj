@@ -37,7 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		558BE18862AFBA91FF8A03F6 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		558BE18862AFBA91FF8A03F6 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* HCSaftiveParam_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCSaftiveParam_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -63,9 +63,9 @@
 		7DADF8C5370B4639FA9AED3A /* Pods-HCSaftiveParam_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCSaftiveParam_Tests.release.xcconfig"; path = "Target Support Files/Pods-HCSaftiveParam_Tests/Pods-HCSaftiveParam_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		887F323B3D6E01DFA91404F4 /* Pods_HCSaftiveParam_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HCSaftiveParam_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9080BCE0121C060DAA3B1B7E /* HCSaftiveParam.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = HCSaftiveParam.podspec; path = ../HCSaftiveParam.podspec; sourceTree = "<group>"; };
+		9080BCE0121C060DAA3B1B7E /* HCSaftiveParam.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HCSaftiveParam.podspec; path = ../HCSaftiveParam.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A0ED87AEA1E2D820AF7886E1 /* Pods-HCSaftiveParam_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCSaftiveParam_Tests.debug.xcconfig"; path = "Target Support Files/Pods-HCSaftiveParam_Tests/Pods-HCSaftiveParam_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		AAAE7B492AFDF68CD3AFC4D6 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		AAAE7B492AFDF68CD3AFC4D6 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		DE1B6BD8535FB93F3C741872 /* Pods-HCSaftiveParam_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HCSaftiveParam_Example.release.xcconfig"; path = "Target Support Files/Pods-HCSaftiveParam_Example/Pods-HCSaftiveParam_Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,7 +193,6 @@
 				A0ED87AEA1E2D820AF7886E1 /* Pods-HCSaftiveParam_Tests.debug.xcconfig */,
 				7DADF8C5370B4639FA9AED3A /* Pods-HCSaftiveParam_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -258,6 +257,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
